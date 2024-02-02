@@ -1,0 +1,31 @@
+DIRECTIONS FOR PREPARING APPLICATIONS AND ADDING THEM TO INTUNE
+
+-Open the Content Prep Tool Application. 
+-Paste the folder path of the installer package, then press enter
+-Paste the name of the file of the package, then press enter
+-Paste the location of where you would like the new prepared application to be placed, then press enter
+-Wait... Sometimes it fails and you may have to do this a couple times.
+
+
+Once you have the prepared application, go to your Intune Admin portal -- Apps-- All Apps-- +Add
+-Add Type= Windows App (Win32), Click select
+-Select the app package (The prepared application), click Ok
+-Add a publisher name, click Next
+-Add the install and uninstall commands (Varies depending on the file) You can google or use ChatGPT to find the commands. You will also want the commands to install quietly.
+-Ensure the install behavior is set to "System", then click Next.
+-Select operating system architecture and system, then click Next
+-In Detection rules, select "Manually configure detection rules" then click +Add
+-If an MSI then click MSI, and it will auto populate.
+-If a file then click File, below is an example of the "Remote help" Package  
+
+Rule type: File
+Path: C:\Program Files\Remote Help
+File or folder: RemoteHelp.exe
+Detection method: String (version)
+Operator: Greater than or equal to
+Value: Specify the version of Remote Help you are deploying.
+Leave Associated with a 32-bit app on 64-bit clients set to No.
+
+Click Ok, Then Next, and go to the Assignments tab.
+
+Assign to the proper users or devices, then save, and submit.
